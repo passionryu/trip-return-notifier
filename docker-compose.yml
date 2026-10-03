@@ -1,0 +1,39 @@
+# 로컬 개발용 인프라 (Postgres, Redis)
+# 실행: docker compose up -d
+# 포트가 겹치면 POSTGRES_PORT=15432 REDIS_PORT=16379 docker compose up -d 처럼 바꿔서 실행
+name: trip-return-notifier
+
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: trip
+      POSTGRES_USER: trip
+      POSTGRES_PASSWORD: trip # 로컬 개발 전용
+      TZ: Asia/Seoul
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U trip -d trip"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:8
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  postgres-data:
+  redis-data:
