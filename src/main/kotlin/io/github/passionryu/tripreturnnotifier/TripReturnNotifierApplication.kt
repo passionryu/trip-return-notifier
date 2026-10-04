@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class TripReturnNotifierApplication
 
 fun main(args: Array<String>) {
-	runApplication<TripReturnNotifierApplication>(*args)
+    runApplication<TripReturnNotifierApplication>(*args)
 }
