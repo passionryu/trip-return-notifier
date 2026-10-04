@@ -43,7 +43,7 @@
                                           [워커: 발송] ──▶ 가짜 발송기 / FCM
 ```
 
-현재는 빈 Spring Boot 프로젝트와 로컬 인프라만 있습니다. 나머지는 [이슈](https://github.com/passionryu/trip-return-notifier/issues)를 하루에 하나씩 처리하며 만들어 갑니다.
+현재는 빈 Spring Boot 프로젝트와 로컬 인프라만 있습니다. 나머지는 [이슈](https://github.com/passionryu/trip-return-notifier/issues)를 하나씩 처리하며 만들어 갑니다.
 
 ## 기술 스택
 
@@ -83,36 +83,38 @@ Postgres는 `localhost:5432`(DB·계정·비밀번호 모두 `trip`), Redis는 `
 
 ## 진행 방식
 
-- 이슈 하나가 하루치 작업입니다. 마일스톤은 주 단위입니다.
+- 이슈 하나가 작업 하나입니다. 순서는 주 단위 마일스톤과 이슈 번호로 관리합니다.
 - 브랜치는 이슈 단위로 만들고, PR 본문에 `Closes #이슈번호`를 적어 이슈를 닫습니다.
 - 문제 해결 티켓을 끝내면 아래 [문제 해결 기록](#문제-해결-기록)에 한 줄을 추가합니다.
+- 커밋, 브랜치, 머지, 코드 스타일 규칙은 [CONTRIBUTING.md](CONTRIBUTING.md)에 있습니다.
 
 ## 로드맵
 
-| 주차 | Day | 티켓 |
+| 주차 | 이슈 | 티켓 |
 |---|---|---|
-| 1주 · 기반과 데이터 모델 | 01 | [로컬 개발 환경 구성과 앱 컨테이너화](https://github.com/passionryu/trip-return-notifier/issues/1) |
-| | 02 | [CI 구축 (GitHub Actions)](https://github.com/passionryu/trip-return-notifier/issues/2) |
-| | 03 | [도메인 정의: 이벤트·여행·판정 규칙 문서화](https://github.com/passionryu/trip-return-notifier/issues/3) |
-| | 04 | [DB 스키마 설계 v1 (ERD)](https://github.com/passionryu/trip-return-notifier/issues/4) |
-| | 05 | [DB 연결과 마이그레이션 도입](https://github.com/passionryu/trip-return-notifier/issues/5) |
-| 2주 · 여행 판정과 비동기 처리 | 06 | [이벤트 수집 API](https://github.com/passionryu/trip-return-notifier/issues/6) |
-| | 07 | [[문제 1] 이벤트 중복 저장 방지](https://github.com/passionryu/trip-return-notifier/issues/7) |
-| | 08 | [여행 판정 로직과 시나리오 테스트](https://github.com/passionryu/trip-return-notifier/issues/8) |
-| | 09 | [[문제 1] 늦게 도착한 이벤트와 순서 뒤섞임](https://github.com/passionryu/trip-return-notifier/issues/9) |
-| | 10 | [기기 시뮬레이터](https://github.com/passionryu/trip-return-notifier/issues/10) |
-| | 11 | [Testcontainers 통합 테스트 기반](https://github.com/passionryu/trip-return-notifier/issues/11) |
-| | 12 | [Redis Stream으로 수집과 판정 분리](https://github.com/passionryu/trip-return-notifier/issues/12) |
-| | 13 | [[문제] DB 저장과 Stream 발행 사이의 유실](https://github.com/passionryu/trip-return-notifier/issues/13) |
-| 3주 · 예약 발송 | 14 | [귀국 시 발송 예약 생성](https://github.com/passionryu/trip-return-notifier/issues/14) |
-| | 15 | [Redis Sorted Set 예약 발송 대기열과 발송 워커](https://github.com/passionryu/trip-return-notifier/issues/15) |
-| | 16 | [[문제 2] 알림은 정확히 한 번만](https://github.com/passionryu/trip-return-notifier/issues/16) |
-| | 17 | [[문제 4] 발송 규칙: 야간 금지·빈도 제한·수신 동의](https://github.com/passionryu/trip-return-notifier/issues/17) |
-| | 18 | [[문제 5] 대조군 배정과 효과 측정](https://github.com/passionryu/trip-return-notifier/issues/18) |
-| 4주 · 피크와 정리 | 19 | [[문제 3] 연휴 귀국 피크 재현](https://github.com/passionryu/trip-return-notifier/issues/19) |
-| | 20 | [[문제 3] 피크 분산과 개선](https://github.com/passionryu/trip-return-notifier/issues/20) |
-| | 21 | [(선택) 실제 푸시 발송과 모니터링](https://github.com/passionryu/trip-return-notifier/issues/21) |
-| | 22 | [회고와 문제 해결 기록 정리](https://github.com/passionryu/trip-return-notifier/issues/22) |
+| 0주 · 준비 | #23 | [개발 규칙 및 자동화 초기 세팅](https://github.com/passionryu/trip-return-notifier/issues/23) |
+| 1주 · 기반과 데이터 모델 | #1 | [로컬 개발 환경 구성과 앱 컨테이너화](https://github.com/passionryu/trip-return-notifier/issues/1) |
+| | #2 | [CI 구축 (GitHub Actions)](https://github.com/passionryu/trip-return-notifier/issues/2) |
+| | #3 | [도메인 정의: 이벤트·여행·판정 규칙 문서화](https://github.com/passionryu/trip-return-notifier/issues/3) |
+| | #4 | [DB 스키마 설계 v1 (ERD)](https://github.com/passionryu/trip-return-notifier/issues/4) |
+| | #5 | [DB 연결과 마이그레이션 도입](https://github.com/passionryu/trip-return-notifier/issues/5) |
+| 2주 · 여행 판정과 비동기 처리 | #6 | [이벤트 수집 API](https://github.com/passionryu/trip-return-notifier/issues/6) |
+| | #7 | [[문제 1] 이벤트 중복 저장 방지](https://github.com/passionryu/trip-return-notifier/issues/7) |
+| | #8 | [여행 판정 로직과 시나리오 테스트](https://github.com/passionryu/trip-return-notifier/issues/8) |
+| | #9 | [[문제 1] 늦게 도착한 이벤트와 순서 뒤섞임](https://github.com/passionryu/trip-return-notifier/issues/9) |
+| | #10 | [기기 시뮬레이터](https://github.com/passionryu/trip-return-notifier/issues/10) |
+| | #11 | [Testcontainers 통합 테스트 기반](https://github.com/passionryu/trip-return-notifier/issues/11) |
+| | #12 | [Redis Stream으로 수집과 판정 분리](https://github.com/passionryu/trip-return-notifier/issues/12) |
+| | #13 | [[문제] DB 저장과 Stream 발행 사이의 유실](https://github.com/passionryu/trip-return-notifier/issues/13) |
+| 3주 · 예약 발송 | #14 | [귀국 시 발송 예약 생성](https://github.com/passionryu/trip-return-notifier/issues/14) |
+| | #15 | [Redis Sorted Set 예약 발송 대기열과 발송 워커](https://github.com/passionryu/trip-return-notifier/issues/15) |
+| | #16 | [[문제 2] 알림은 정확히 한 번만](https://github.com/passionryu/trip-return-notifier/issues/16) |
+| | #17 | [[문제 4] 발송 규칙: 야간 금지·빈도 제한·수신 동의](https://github.com/passionryu/trip-return-notifier/issues/17) |
+| | #18 | [[문제 5] 대조군 배정과 효과 측정](https://github.com/passionryu/trip-return-notifier/issues/18) |
+| 4주 · 피크와 정리 | #19 | [[문제 3] 연휴 귀국 피크 재현](https://github.com/passionryu/trip-return-notifier/issues/19) |
+| | #20 | [[문제 3] 피크 분산과 개선](https://github.com/passionryu/trip-return-notifier/issues/20) |
+| | #21 | [(선택) 실제 푸시 발송과 모니터링](https://github.com/passionryu/trip-return-notifier/issues/21) |
+| | #22 | [회고와 문제 해결 기록 정리](https://github.com/passionryu/trip-return-notifier/issues/22) |
 
 ## 문제 해결 기록
 
