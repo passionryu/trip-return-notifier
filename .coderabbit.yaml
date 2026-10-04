@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: ko-KR
+tone_instructions: "한국어로 간결하게 리뷰한다. 스타일보다 정확성, 동시성, 데이터 유실 위험을 우선 지적한다."
+
+reviews:
+  profile: chill
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  auto_review:
+    enabled: true
+    drafts: false
+  pre_merge_checks:
+    docstrings:
+      mode: "off" # 함수 설명 주석 비율은 리뷰 기준으로 삼지 않는다
+  path_filters:
+    - "!gradle/wrapper/**"
+    - "!gradlew"
+    - "!gradlew.bat"
+  path_instructions:
+    - path: "src/main/**/*.kt"
+      instructions: |
+        이 프로젝트의 핵심 요구 사항을 기준으로 본다.
+        - 이벤트는 중복되고, 순서가 뒤섞이고, 늦게 도착한다. 멱등성과 이벤트 시각 기준 처리를 확인한다.
+        - 알림은 정확히 한 번 발송되어야 한다. 워커가 여러 대이거나 도중에 죽는 경우를 고려한다.
+        - "조회 후 저장" 같은 경쟁 조건, 트랜잭션 경계, DB 저장과 Redis 발행 사이의 유실을 지적한다.
+        - 좌표 원본을 받거나 저장하는 코드가 있으면 지적한다. 국가 코드와 날짜만 다룬다.
+        - 포맷은 ktlint가 검사하므로 지적하지 않는다.
+    - path: "src/test/**/*.kt"
+      instructions: "동시성, 중복, 순서 뒤섞임 시나리오가 실제로 검증되는지 본다."
+
+chat:
+  auto_reply: true
